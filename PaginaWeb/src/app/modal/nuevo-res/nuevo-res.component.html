@@ -1,0 +1,13 @@
+<!-- <h4 style="text-align: center;">{{datos.mensaje}}</h4> -->
+<div *ngIf="datos.contenido">
+      <mat-dialog-content class="dialog-content">
+            <!-- Si [perfil] que es el @input en edit component tiene datos me muestra, si no me muetra el nuevoComponet  -->
+            
+                  <app-edit-restaurante [perfil]= "datos.contenido"></app-edit-restaurante>   
+           
+            <!-- En realidad esto no lo uso, ya que es un administrador -->
+            <!-- <ng-template #showNuevoRes>
+                  <app-nuevo-restaurante></app-nuevo-restaurante>
+            </ng-template> -->
+      </mat-dialog-content>
+</div>

@@ -1,0 +1,339 @@
+<div>
+
+  <ng-template [ngIf] ="emailVerificado == false">
+    <div class="main-content">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="card">
+                      <div class="card-header card-header-info">
+                          <h4 class="card-title">Agregar información</h4>
+                      </div>
+                      <div class="card-body">
+    
+                          <div class="card mb-3">
+                              <div class="row no-gutters">
+                                <div class="col-md-4">
+                                   <img src="../../../assets/img/icono_clientes.svg" class="card-img2" alt="about.id">
+                                </div>
+                                <div class="col-md-8">
+                                  <div class="card-body">
+                                    <p>Debes agregar información de tu restaurante primero</p>
+                                    <p>Ir a -> Restaurante</p>
+                                  </div>
+                                </div>
+                              </div>
+                          </div>
+                    
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</ng-template>
+
+<ng-template [ngIf] ="emailVerificado == true">
+
+<ng-template [ngIf]="estadoRestauranteActual(estadoRestaurante) == true">
+  <div *ngIf="validacionRestauranteExiste(valorRestaurante) == false; else validacionRestaurante">
+    <div class="main-content">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="card">
+                      <div class="card-header card-header-info">
+                          <h4 class="card-title">Agregar información</h4>
+                      </div>
+                      <div class="card-body">
+    
+                          <div class="card mb-3">
+                              <div class="row no-gutters">
+                                <div class="col-md-4">
+                                   <img src="../../../assets/img/icono_clientes.svg" class="card-img2" alt="about.id">
+                                </div>
+                                <div class="col-md-8">
+                                  <div class="card-body">
+                                    <p>Debes agregar información de tu restaurante primero</p>
+                                    <p>Ir a -> Restaurante</p>
+                                </div>
+                                </div>
+                              </div>
+                          </div>
+                    
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  </div>
+
+<!-- Una vez agregado un restaurante valida si tiene ya subio el documento de verificacion -->
+<ng-template #validacionRestaurante>
+  <div *ngFor="let p of perfil$ | async">
+    <div *ngIf="usuarioLog == p.userUID">
+      <div *ngIf="p.estadoDocumento.toString() === 'Sin Documento'; else verificacionRes">
+        <div class="main-content">
+          <div class="container-fluid">
+              <div class="row">
+                  <div class="col-md-12">
+                      <div class="card">
+                          <div class="card-header card-header-info">
+                              <h4 class="card-title">Restaurante</h4>
+                          </div>
+                          <div class="card-body">
+        
+                              <div class="card mb-3">
+                                  <div class="row no-gutters">
+                                    <div class="col-md-4">
+                                       <img src="../../../assets/img/icono_clientes.svg" class="card-img2" alt="about.id">
+                                    </div>
+                                    <div class="col-md-8">
+                                      <div class="card-body">
+                                        <app-validacion></app-validacion>
+                                      </div>
+                                    </div>
+                                  </div>
+                              </div>
+                        
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      </div> 
+    </div>
+  </div> 
+  
+
+  <ng-template #verificacionRes>
+      <div *ngFor="let perfil of perfil$ | async ">
+          <div *ngIf="usuarioLog == perfil.userUID">
+              <ng-template [ngIf]="perfil.estadoDocumento.toString() === 'documento en Revision'">
+                <div class="main-content">
+                  <div class="container-fluid">
+                      <div class="row">
+                          <div class="col-md-12">
+                              <div class="card">
+                                  <div class="card-header card-header-info">
+                                      <h4 class="card-title">Documento en revisión</h4>
+                                  </div>
+                                  <div class="card-body">
+                
+                                      <div class="card mb-3">
+                                          <div class="row no-gutters">
+                                            <div class="col-md-4">
+                                               <img src="../../../assets/img/icono_clientes.svg" class="card-img2" alt="about.id">
+                                            </div>
+                                            <div class="col-md-8">
+                                              <div class="card-body">
+                                                <p>Tu restaurante esta siendo revisado por el administrador.</p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      </div>
+                              
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              </ng-template>
+
+              <ng-template [ngIf]="perfil.estadoDocumento.toString() === 'documento Rechazado' || perfil.resVerificado.toString() === 'Rechazado'">
+                <div class="main-content">
+                  <div class="container-fluid">
+                      <div class="row">
+                          <div class="col-md-12">
+                              <div class="card">
+                                  <div class="card-header card-header-info">
+                                      <h4 class="card-title">Documento rechazado</h4>
+                                  </div>
+                                  <div class="card-body">
+                
+                                      <div class="card mb-3">
+                                          <div class="row no-gutters">
+                                            <div class="col-md-4">
+                                               <img src="../../../assets/img/icono_clientes.svg" class="card-img2" alt="about.id">
+                                            </div>
+                                            <div class="col-md-8">
+                                              <div class="card-body">
+                                                <app-validacion></app-validacion>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      </div>
+                              
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              </ng-template>
+
+              <ng-template [ngIf]="perfil.estadoDocumento.toString() === 'documento Aprobado' && perfil.resVerificado.toString() === 'En revision'">
+                <div class="main-content">
+                  <div class="container-fluid">
+                      <div class="row">
+                          <div class="col-md-12">
+                              <div class="card">
+                                  <div class="card-header card-header-info">
+                                      <h4 class="card-title">Documento aprobado</h4>
+                                  </div>
+                                  <div class="card-body">
+                
+                                      <div class="card mb-3">
+                                          <div class="row no-gutters">
+                                            <div class="col-md-4">
+                                               <img src="../../../assets/img/icono_clientes.svg" class="card-img2" alt="about.id">
+                                            </div>
+                                            <div class="col-md-8">
+                                              <div class="card-body">
+                                                <p>Tu restaurante ha sido <b>aprobado</b>. En unos minutos será habilitado </p>
+                                              </div>
+                                            </div>
+                                          </div>
+                                      </div>
+                              
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              </ng-template>
+
+              <ng-template [ngIf]="perfil.resVerificado.toString() === 'Aprobado' && perfil.estadoDocumento.toString() === 'documento Aprobado'">
+                  <div>
+                    <div class="main-content">
+                      <div class="container-fluid">
+                        <div class="row">
+                          <div class="col-md-12">
+                            <div class="card">
+                              <div class="card-header card-header-info">
+                                <h4 class="card-title ">Promociones</h4>
+                              </div>
+                              <mat-tab-group mat-align-tabs="center">
+                                <mat-tab label="Promociones Habilitadas"><br>
+                                  <div style="text-align: center;">
+                                    <app-promociones></app-promociones>
+                                    <hr>
+                                  </div>
+                                  
+                                        <div class="row" *ngIf="promociones$ | async as promocion">
+                                          <div *ngFor="let promo of promocion; let i = index">
+                                            <div class="col-md-8 mx-auto" *ngIf="usuarioLog === promo.userUID && promo.userUID && promo.estado == 'verdadero'">
+                                                <div>
+                                                  <img [src]="promo.fotosPromocion" alt="Card image cap" width="300px" height="250px">
+                                                  <div class="card-body cardTitle">
+                                                    <div style="text-align: center;">
+                                                      <button mat-button color="warm" *ngIf="promo.estado === 'verdadero'" (click)="deshabilitarPromo(promo)"><mat-icon arial-label="Eliminar">highlight_off</mat-icon>Deshabilitar</button>
+                                                      <button mat-button color="warm" *ngIf="promo.estado === 'verdadero'" (click)="eliminarPromo(promo)"><mat-icon arial-label="Eliminar">delete</mat-icon>Eliminar</button>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <hr>
+                                          </div>
+              
+                                        </div>
+                                        <div style="text-align: center;">
+                                        </div>                            
+                                </mat-tab>
+                                <mat-tab label="Promoción Deshabilitada">
+                                  <br>
+                                  <div class="row" style="text-align: center;">
+                                        <div class="row" *ngIf="promociones$ | async as promocion">
+                                          <div *ngFor="let promo of promocion; let i = index">
+                                            <div class="col-md-8 mx-auto my-1 " *ngIf="usuarioLog === promo.userUID && promo.userUID && promo.estado =='falso'">
+                                              <a>
+                                                <div class="card" class="img-contenedor">
+                                                  <img [src]="promo.fotosPromocion" alt="Card image cap" width="300px" height="250px">
+                                                  <div class="card-body cardTitle">
+                                                    <div style="text-align: center;">
+                                                      <button mat-button color="info" *ngIf="promo.estado === 'falso'" (click)="habilitarPromo(promo)"><mat-icon arial-label="habilitar">check_circle</mat-icon>Habilitar</button>
+                                                      <button mat-button color="warm" *ngIf="promo.estado === 'falso'" (click)="eliminarPromo(promo)"><mat-icon arial-label="Eliminar">delete</mat-icon>Eliminar</button>
+
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </a>
+                                            </div>
+                                            <hr>
+                                          </div>
+                            
+                                        </div>                        
+                                     
+                                  </div>
+                                </mat-tab>
+                              </mat-tab-group>
+
+                            </div>
+                          </div>
+       
+                            
+
+                        </div>
+                      </div>
+                      
+                    </div>
+                    
+      </div>
+              </ng-template>
+            
+          </div>
+      </div>
+  </ng-template>
+</ng-template>
+
+
+</ng-template>
+
+<ng-template [ngIf]="estadoRestauranteActual(estadoRestaurante) == false">
+  <div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info">
+                        <h4 class="card-title">Restaurante Deshabilitado</h4>
+                    </div>
+                    <div class="card-body">
+  
+                        <div class="card mb-3">
+                            <div class="row no-gutters">
+                              <div class="col-md-4">
+                                 <img src="../../../assets/img/icono_clientes.svg" class="card-img2" alt="about.id">
+                              </div>
+                              <div class="col-md-8">
+                                <div class="card-body">
+                                    <p>Tu restaurante esta deshabilitado, no puedes agregar promociones por el momento.</p>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</ng-template>
+  
+</ng-template>
+
+</div>
+
+
+
+
+  

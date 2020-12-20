@@ -1,0 +1,118 @@
+.divCenter{
+    display: flex;
+    justify-content: center;
+    margin-top: 2%;
+    padding-bottom: 2%;
+}
+
+.promociones{
+    background-image: url("../../assets/img/portada_home.png");
+    background-repeat: repeat; 
+    background-position: center;
+    background-size: cover;
+    position: relative;
+    /* min-height: 100%; */
+    height: 100%;
+        /* width: auto; */
+ }
+
+
+.element.style {
+    padding-left: 83px;
+    padding-right: 50px;
+}
+
+.mat-form-field{
+    margin-top: 10px;
+}
+button.mat-primary {
+    background-color: #473ab7;
+}
+
+.social-g{
+    background-color:#b53f3f;
+    color: white;
+    text-align: center;
+    width: 100%;
+}
+
+.social-f{
+    width: 100%;
+    background-color:#473ab7;
+    color: white;
+    text-align: center;
+}
+
+.social-crear{
+    padding: 0 34% 0 34%;
+}
+
+.inicio{
+    color: black;
+    background-color: gray;
+    width: 100%;
+}
+.iniciar{
+    text-align: center;
+    background-color:#d85c00;
+    color: #fff;
+    width: 100%;
+    margin: 5%;
+}
+
+.iniciarS{
+    text-align: center;
+    background-color:#b53f3f;
+    color: #fff;
+    width: 100%;
+    margin: 2%;
+}
+
+.enviarCorreo{
+    background-color:#d85c00;
+    color: white;
+}
+
+
+.crear{
+    background-color:#b53f3f;
+    color: #fff;
+
+}
+
+.e{
+    color: red;
+    font-size: 10px;
+    margin: 0%;
+    padding: 0%;
+}
+
+.mat-card{
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.div .mat-form-field-flex{
+    width: 240px;
+}
+
+.mat-card-actions .mat-raised-button, .mat-card-actions .mat-stroked-button {
+    /* margin: 0 8px; */
+    margin: 5px 8px;
+}
+
+.login-content{
+    display: inline;
+    text-align: center;
+}
+.titulo{
+    margin-left: 25%;
+}
+
+.titulo-Crear{
+    margin-left: 25%;
+}
+
+
+
+

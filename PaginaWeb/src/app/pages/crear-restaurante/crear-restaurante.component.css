@@ -1,0 +1,42 @@
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
+.container{
+    width: 100%;
+}
+
+p{
+    color: #c73521;
+    font-size: 11px;
+    text-align: center;
+    margin: 0%;
+    padding: 0%;
+}
+
+p .m{
+    color: #c73521;
+    font-size: 11px;
+    text-align: left;
+    margin: 0%;
+    padding: 0%; 
+}
+
+.limite{
+    color: blueviolet;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+input:invalid+span:after {
+    position: absolute;
+    content: '✖';
+    padding-left: 5px;
+  }
+  
+  input:valid+span:after {
+    position: absolute;
+    content: '✓';
+    padding-left: 5px;
+  }

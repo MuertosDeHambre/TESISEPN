@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-button slot="start" fill ="none" (click)= "goRegreso()">
+      <ion-icon name = "arrow-back" ></ion-icon>
+    </ion-button>
+    <ion-button slot="end" fill ="none" (click)="presentActionSheet()">
+      <ion-icon name = "menu" ></ion-icon>
+    </ion-button>
+    <ion-title style="text-align: center;">Menú Diario</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div *ngFor = "let m of menus">
+    <div *ngIf = "usuarioLog === m.userUID">
+      <h2 style="text-align: center;"> DESAYUNO</h2>
+
+  <ion-item>
+    <ion-label>
+      <h5><b>Detalle del Desayuno: </b>{{m.detalleDesayuno}}</h5>
+      <h5><b>Precio : </b>{{m.precioDesayuno}}</h5>
+    </ion-label>
+  </ion-item>
+  <br>
+  <br>
+  <h2 style="text-align: center;"> ALMUERZO</h2>
+  <ion-item>
+    <ion-label>
+      <h5><b>Entrada : </b>{{m.entradaAlmuerzo}}</h5>
+      <h5><b>Segundo : </b>{{m.segundoAlmuerzo}}</h5>
+      <h5><b>Jugo : </b>{{m.jugoAlmuerzo}}</h5>
+      <h5><b>Precio : </b>{{m.precioAlmuerzo}}</h5>
+    </ion-label>
+  </ion-item>
+  <br>
+  <br>
+  <ion-button (click) ="presentModal(m.id)">Actualizar Menu</ion-button>  
+  <br>
+    </div>
+  </div>
+
+</ion-content>

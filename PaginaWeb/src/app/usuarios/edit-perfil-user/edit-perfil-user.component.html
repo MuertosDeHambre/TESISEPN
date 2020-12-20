@@ -1,0 +1,53 @@
+<div class="restaurante-container">
+    <form [formGroup]="editDesayunoForm" (ngSubmit)="editUser(editDesayunoForm.value)" class="container">
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Nombre" formControlName="nombre" required maxlength="35">
+            <div *ngIf="editDesayunoForm.get('nombre').errors && editDesayunoForm.get('nombre').dirty" >
+                <p class="e" *ngIf="editDesayunoForm.get('nombre').hasError('required')">El campo no puede estar vacio</p>
+                <p class="e" *ngIf="editDesayunoForm.get('nombre').hasError('pattern')">El campo no debe contener números o espacios</p>
+                <p class="e" *ngIf="editDesayunoForm.get('nombre').hasError('minlength')">Mínimo 3 caracteres</p>
+                <p class="e" *ngIf="editDesayunoForm.get('nombre').hasError('maxlength')">Máximo 30 caracteres</p>
+
+            </div>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Apellido" formControlName="apellido" required maxlength="35">
+             <div *ngIf="editDesayunoForm.get('apellido').errors && editDesayunoForm.get('apellido').dirty" >
+                <p class="e" *ngIf="editDesayunoForm.get('apellido').hasError('required')">El campo no puede estar vacio</p>
+                <p class="e" *ngIf="editDesayunoForm.get('apellido').hasError('pattern')">El campo no debe contener números</p>
+                <p class="e" *ngIf="editDesayunoForm.get('apellido').hasError('maxlength')">Máximo 30 caracteres</p>
+                <p class="e" *ngIf="editDesayunoForm.get('nombre').hasError('minlength')">Mínimo 3 caracteres</p>
+
+            </div>
+        </mat-form-field>
+
+        <!-- <mat-form-field class="example-full-width">
+            <textarea matInput placeholder="Correo electrónico" formControlName="email" ></textarea>
+            <div *ngIf="editDesayunoForm.get('email').errors && editDesayunoForm.get('email').dirty" >
+                <p class="e" *ngIf="editDesayunoForm.get('email').hasError('required')">El campo no puede estar vacio</p>
+            </div>
+        </mat-form-field> -->
+
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Número celular" formControlName="numero"  required maxlength="10">
+            <div *ngIf="editDesayunoForm.get('numero').errors" >
+                <p class="e" *ngIf="editDesayunoForm.get('numero').hasError('minlength')">Minimo 10 caracteres</p>
+                <p class="e" *ngIf="editDesayunoForm.get('numero').hasError('pattern')">El campo debe contener números</p>
+            </div>
+        </mat-form-field>
+        
+       
+        <mat-divider></mat-divider>
+
+        <button mat-raised-button color="primary" type="submit" [disabled]="editDesayunoForm.invalid" [mat-dialog-close]="true">
+            <mat-icon>done</mat-icon>
+            <span>Aceptar</span>
+        </button>
+    
+        <button mat-raised-button color="accent" type="button" [mat-dialog-close]="true"  (click)="cancelar($event)">
+            <mat-icon>close</mat-icon>
+            <span>Cancelar</span>
+        </button>
+     
+    </form>
+</div>

@@ -1,0 +1,121 @@
+<div class="restaurante-container">
+    <form [formGroup]="newPostForm" (ngSubmit)="addPerfil(newPostForm.value)" class="container">
+        <mat-tab-group mat-align-tabs="center">
+            <mat-tab label="1"><br>
+                            <!-- Mostrar el uid del usuario logueado -->
+                    <!-- formControlName: Nombre que se le da en el componete ts -->
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Nombre del restaurante"  autocomplete="off" formControlName="nombreRestaurante" maxlength="40" required>
+                        <div *ngIf="newPostForm.get('nombreRestaurante').errors && newPostForm.get('nombreRestaurante').dirty " >
+                            <p class="e" *ngIf="newPostForm.get('nombreRestaurante').hasError('required')">El campo no debe estar vacio</p>
+                            <p class="e" *ngIf="newPostForm.get('nombreRestaurante').hasError('minlength')">Mínimo 3 caracteres</p>
+                            <p class="e" *ngIf="newPostForm.get('nombreRestaurante').hasError('maxlength')">Máximo 35 caracteres</p>
+                        </div>
+                    </mat-form-field>
+                    
+                    <mat-form-field class="example-full-width">
+                        <mat-select [(value)]="selected" placeholder="Tipo de restaurante" formControlName="tipoRestaurante" required>
+                            <mat-option value="Restaurante">Restaurante</mat-option>
+                            <mat-option value="Kioscos de comida">Kioscos de comida</mat-option>
+                        </mat-select>
+                        <div *ngIf="newPostForm.get('tipoRestaurante').errors && newPostForm.get('tipoRestaurante').dirty " maxlength="40">
+                            <p class="e" *ngIf="newPostForm.get('tipoRestaurante').hasError('required')">El campo no debe estar vacio</p>
+                            <p class="e" *ngIf="newPostForm.get('tipoRestaurante').hasError('minlength')">Mínimo 3 caracteres</p>
+                            <p class="e" *ngIf="newPostForm.get('tipoRestaurante').hasError('maxlength')">Máximo 35 caracteres</p>
+                        </div>
+                    </mat-form-field>
+                
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Hora de apertura (hh:mm)" type="text"  formControlName="horaApertura" required>
+                        <div *ngIf="newPostForm.get('horaApertura').errors && newPostForm.get('horaApertura').dirty " >
+                            <p class="e" *ngIf="newPostForm.get('horaApertura').hasError('required')">El campo no puede estar vacio</p>
+                            <p class="e" *ngIf="newPostForm.get('horaApertura').hasError('pattern')">hora mínima de apertura: 06:00 - 11:59 </p>
+                            <!-- <p class="e" *ngIf="editResForm.get('horaApertura').hasError('pattern')">Hora de Apertura: 00:01 - 11.59 AM</p> -->
+                        </div>
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Hora de cierre (hh:mm)" type="text" formControlName="horaCierre" required>
+                        <div *ngIf="newPostForm.get('horaCierre').errors && newPostForm.get('horaCierre').dirty">
+                            <p class="e" *ngIf="newPostForm.get('horaCierre').hasError('required')">El campo no debe estar vacio</p>
+                            <p class="e" *ngIf="newPostForm.get('horaCierre').hasError('pattern')">hora mínima de apertura: 12:00 - 23:59 </p>
+                        </div>
+                        
+                    </mat-form-field>
+
+                    <mat-form-field class="example-full-width">
+                        <input matInput placeholder="Dirección del restaurante" autocomplete="off" formControlName="direccionRestaurante" maxlength="55" required>
+                        <div *ngIf="newPostForm.get('direccionRestaurante').errors && newPostForm.get('direccionRestaurante').dirty " >
+                            <p class="e" *ngIf="newPostForm.get('direccionRestaurante').hasError('required')">El campo no debe estar vacio</p>
+                            <p class="e" *ngIf="newPostForm.get('direccionRestaurante').hasError('minlength')">Mánimo 5 caracteres</p>
+                            <p class="e" *ngIf="newPostForm.get('direccionRestaurante').hasError('maxlength')">Máximo 50 caracteres</p>
+                        </div>
+                    </mat-form-field>
+                    
+                    <div style="text-align: center;">
+                        <a mat-raised-button tabindex="-1" type="button" 
+                        class="btn" (click)='moveToSelectedTab("2")'>Siguiente</a>
+                    </div>
+
+
+            </mat-tab>
+            <mat-tab label="2"><br>
+
+                          
+        
+        <ng-template [ngIf]= "selected === 'Kioscos de comida'">
+            
+        </ng-template>
+        <ng-template [ngIf]= "selected === 'Restaurante'">
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Capacidad del restaurante (Aforo máximo) " autocomplete="off" formControlName="capacidadRestaurante" maxlength="3" required>
+                <div *ngIf="newPostForm.get('capacidadRestaurante').errors && newPostForm.get('capacidadRestaurante').dirty " >
+                    <p class="e" *ngIf="newPostForm.get('capacidadRestaurante').hasError('maxlength')">Aforo máximo 99 personas</p>
+                    <p class="e" *ngIf="newPostForm.get('capacidadRestaurante').hasError('pattern')">El campo debe contener numeros</p>
+                </div>
+            </mat-form-field>
+
+        </ng-template>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Facebook (/user)" autocomplete="off" formControlName="socialF" maxlength="35">
+            <div *ngIf="newPostForm.get('socialF').errors && newPostForm.get('socialF').dirty " >
+                <p class="e" *ngIf="newPostForm.get('socialF').hasError('maxlength')">Máximo 30 caracteres</p>
+            </div>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Instagram (/user)" autocomplete="off" formControlName="socialG" maxlength="35">
+            <div *ngIf="newPostForm.get('socialG').errors && newPostForm.get('socialG').dirty " >
+                <p class="e" *ngIf="newPostForm.get('socialG').hasError('maxlength')">Máximo 30 caracteres</p>
+            </div>
+        </mat-form-field>
+        <div style="text-align: center;">
+                  
+        <button mat-raised-button onclick="document.getElementById('input_subida').click()" type="button"><mat-icon>cloud_upload</mat-icon>  <span>Foto Restaurante</span></button>
+        <p class="limite">Tamaño máximo 5 Mb</p>
+        <input id="input_subida"  type="file" style="display: none" (change)="seleccionar($event)">
+
+        <p>{{labelFile}}</p>
+        
+        <button style="margin-bottom: 2%;" mat-raised-button color="primary" type="submit"   [disabled]="newPostForm.invalid" [mat-dialog-close]="true">
+            <mat-icon>done</mat-icon>
+            <span>Aceptar</span> 
+        </button>
+        <button mat-raised-button color="accent" routerLink='/dueño/restaurante' type="button" [mat-dialog-close]="true">
+            <mat-icon>close</mat-icon>
+            <span>Cancelar</span>
+        </button><hr>
+        <a mat-raised-button tabindex="-1" type="button" 
+        class="btn" (click)='moveToSelectedTab("1")'>Anterior</a>
+
+        </div>
+  
+
+    </mat-tab>
+            
+
+</mat-tab-group>
+        
+  
+    </form>
+    <p class="m">(*) Campos obligatorios</p>
+</div>

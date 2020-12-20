@@ -1,0 +1,66 @@
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
+.container{
+    width: 100%;
+}
+
+
+button{
+    margin: 5px;
+}
+
+.btn{
+    background-color: #3c4752;
+    text-transform: capitalize;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    width: 50%;
+  }
+
+  p{
+    color: #c73521;
+    font-size: 11px;
+    text-align: center;
+    margin: 0%;
+    padding: 0%;
+}
+
+.limite{
+    color: blueviolet;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.am{
+    position: absolute;
+    content: '✖';
+    padding-left: 5px;
+
+}
+
+.pm{
+    position: absolute; 
+}
+
+.m{
+    color: #c73521;
+    font-size: 11px;
+    text-align: center;
+    margin: 0%;
+    padding: 0%; 
+}
+
+/* input:invalid+span:after {
+    position: absolute;
+    content: '✖';
+    padding-left: 5px;
+  }
+  
+  input:valid+span:after {
+    position: absolute;
+    content: '✓';
+    padding-left: 5px;
+  } */

@@ -1,0 +1,20 @@
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
+.container{
+    width: 100%;
+
+}
+
+p{
+    color: #c73521;
+    font-size: 11px;
+    margin: 0%;
+    padding: 0%;
+}
+
+button{
+    margin: 5px;
+}

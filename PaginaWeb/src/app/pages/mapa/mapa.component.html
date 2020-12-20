@@ -1,0 +1,48 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-info">
+                        <h4 class="card-title">Mapa</h4>
+                        
+                    </div>
+                    <div class="card-body">
+                        <div class="card mb-3">
+                            <div class="row no-gutters">
+                              <div class="col-md-12">
+                                  <!-- <button (click)="actualizarCoordenada()">mmmm</button> -->
+                                <ng-template [ngIf]="validacionExisteCoordenada(valor) === true">
+                                    <div style="text-align: center;">
+                                        <button class="btn" (click)="verCoordenadas()">Actualizar Dirección</button>
+                                        <p>La ubicacion es importante para que tus clientes puedan encontrar tu restaurante con mayor facilidad.</p>
+                                        <p>Mueve el pup-up a la dirección donde se encuentra tu restaurante:</p>
+                                    </div>
+                                </ng-template>
+
+                                <ng-template [ngIf]="validacionExisteCoordenada(valor) === false">
+                                    <div style="text-align: center;" >
+                                        <button class="btn" (click)="prueba()">Guardar dirección</button>
+                                        <p>La ubicacion es importante para que tus clientes puedan encontrar tu restaurante con mayor facilidad.</p>
+                                        <p>Mueve el pup-up a la dirección donde se encuentra tu restaurante:</p>
+                                    </div>
+                                </ng-template>
+                                <br><br><br><br><br><br><br><br><br><br><br><br>
+                                <br><br><br><br><br><br><br>
+                                <button mat-button color="info" (click)="regresar()"><mat-icon arial-label="">reply</mat-icon>Regresar</button>
+
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="mapa"></div>
+
+
+
+
+  

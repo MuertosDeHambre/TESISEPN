@@ -1,0 +1,431 @@
+<ng-template [ngIf]="emailVerificado">
+    <div *ngIf="validacion(valor) == false">
+        <div class="main-content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card">
+                            <div class="card-header card-header-info">
+                                <h4 class="card-title">Restaurante</h4>
+                            </div>
+                            <div class="card-body">
+          
+                                <div class="card mb-3">
+                                    <div class="row no-gutters">
+                                      <div class="col-md-4">
+                                         <img src="../../../assets/img/icono_clientes.svg" class="card-img2" alt="about.id">
+                                      </div>
+                                      <div class="col-md-8">
+                                        <div class="card-body">
+                                            <p style="text-align: center;">Agregar información del restaurante</p>
+                                            <hr>
+                                            <p class="card-text"><a href="#" class="btn" data-toggle="modal" data-target="#dataModal" (click)="onNewPost()">Agregar</a></p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+                          
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+  </div>
+</ng-template>
+
+<ng-template  [ngIf]="emailVerificado === false">
+    <div class="main-content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header card-header-info">
+                            <h4 class="card-title">Validar e-mail</h4>
+                        </div>
+                        <div class="card-body">
+      
+                            <div class="card mb-3">
+                                <div class="row no-gutters">
+                                  <div class="col-md-4">
+                                     <img src="../../../assets/img/icono_clientes.svg" class="card-img2" alt="about.id">
+                                  </div>
+                                  <div class="col-md-8">
+                                    <div class="card-body">
+                                        <p>Tu correo electrónico aún no ha sido verificado. 
+                                        Revisa tu bandeja de entrada o el correo no deseado y sigue los pasos para activar tu cuenta.
+                                        </p>
+                                        <hr>
+                                        <p class="card-text"><a href="#" class="btn" data-toggle="modal" (click)="enviarEmail()">Reenviar correo</a></p>
+                                    
+                                    </div>
+                                  </div>
+                                </div>
+                            </div>
+                      
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<!-- Cuando Existe un restaurante entra a este bucle -->
+<ng-template [ngIf]="validacion(valor) == true">
+    <div *ngFor="let p of perfil$ | async">
+        <div *ngIf="usuarioLog == p.userUID">
+            <div class="main-content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header card-header-info">
+                                    <h4 class="card-title">Información del restaurante
+                                        &nbsp;&nbsp;&nbsp;
+                                        <!-- <span style="color: red" *ngIf="p.estado === 'falso'" >Restaurante Deshabilitado</span> -->
+                                    </h4>
+                                    
+                                </div>
+                                <div class="card-body" >
+                                    <div class="card mb-3">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-1"></div>
+                                          <div class="col-md-5">
+                                            <div class="card card-profile">
+                                                <div class="card-header card-header-danger">
+                                                    <h4 class="card-title">Actualiza tu información</h4>
+                                                </div>
+                                                <br>
+                                                <mat-form-field class="example-full-width">
+                                                    <label for="Nombre">Nombre del Restaurante</label>
+                                                    <input [disabled]="true" matInput type="text" [(ngModel)]="p.nombreRestaurante">
+                                                    
+                                                </mat-form-field>
+                                          
+                                                <mat-form-field class="example-full-width">
+                                                  <label for="Nombre">Tipo de Restaurante</label>
+                                                  <input [disabled]="true" matInput type="text" [(ngModel)]="p.tipoRestaurante">
+                                              </mat-form-field>
+                                              <mat-form-field class="example-full-width">
+                                                <label for="Nombre">Dirección</label>
+                                                <input [disabled]="true" matInput type="text" [(ngModel)]="p.direccionRestaurante">
+                                            </mat-form-field>
+                                            <div *ngIf="p.tipoRestaurante === 'Restaurante'">
+                                                <mat-form-field class="example-full-width">
+                                                    <label for="Nombre">Capacidad</label>
+                                                    <input [disabled]="true" matInput type="text" [(ngModel)]="p.capacidadRestaurante">
+                                                </mat-form-field>
+                                            </div>
+                                            
+                                          <div class="row">
+                                              <div class="col-md-2">
+                                                                         
+                                              </div>
+                                              <div class="col-md-4">
+                                                <mat-form-field class="example-full-width">
+                                                    <label>Hora de Apertura</label>
+                                                    <input [disabled]="true" matInput type="text" [(ngModel)]="p.horaApertura" >
+                                                </mat-form-field>                                          
+                                              </div>
+                                              <div class="col-md-4">
+                                                <mat-form-field class="example-full-width">
+                                                    <label>Hora de Cierre</label>
+                                                    <input [disabled]="true" matInput type="text" [(ngModel)]="p.horaCierre">
+                                                </mat-form-field>
+                                             </div>
+                                             <div class="col-md-2">
+                                                                         
+                                            </div>
+                                          </div>
+
+                                            <app-editar-perfil></app-editar-perfil>
+                                          <!-- <button class="btn" (click)="editarMapa()">Editar ubicacion</button> -->
+
+                                            </div> 
+                                          </div>  
+                                          <div class="col-md-1">
+                                          </div>
+                                          <div class="col-md-4">
+                                            <div class="card card-profile">
+                                                <div class="card-avatar">
+                                                  <a>
+                                                    <img class="img" [src]="p.imagenRes" *ngIf="p.imagenRes; else sinFoto"/>
+                                                  </a>
+                                                  <ng-template #sinFoto>
+                                                      <a>
+                                                        <img class="img" [src]="'https://i.pinimg.com/originals/5f/87/61/5f8761590f4c651c8383dd58fce5dbf0.png'" />
+                                                      </a>
+                                                  </ng-template>
+                                                </div>
+                                                <div class="card-body">
+                                                  <h4 class="card-title">
+                                                    {{p.nombreRestaurante}}
+                                                    </h4>
+                                                    <div style="text-align: center;" *ngIf="p.socialF || p.socialG">
+                                                        <button  mat-raised-button *ngIf="p.socialF">
+                                                            <a href="https://www.facebook.com/{{p.socialF}}" target="_blank" rel="noopener noreferrer">Facebook</a>
+                                                          </button> &nbsp;
+                                                          <button  mat-raised-button *ngIf="p.socialG">
+                                                            <a href="https://www.instagram.com/{{p.socialG}}" target="_blank" rel="noopener noreferrer">Instagram</a>
+                                                          </button>  
+                                                      </div>
+                                                  <hr>
+                                                  <mat-card-actions>
+                                                    <button mat-button color="info" *ngIf="p.estado === 'verdadero'" (click)="deshabilitarRestaurante(p)"><mat-icon arial-label="deshabilitar">highlight_off</mat-icon>Deshabilitar</button>
+                                                    <button mat-button color="warning" *ngIf="p.estado === 'falso'" (click)="habilitarRestaurante(p)"><mat-icon arial-label="hablitar">check_circle</mat-icon>Habilitar</button>
+                                                    <button mat-button color="info" *ngIf="validacionMapa(valorMapa) === true" (click)="verMapa()"><mat-icon arial-label="">room</mat-icon>Ver mapa</button>
+                                                </mat-card-actions>
+                                                </div>
+                                              </div>
+                                              <ng-template [ngIf]="validacionMapa(valorMapa) === true">
+                                                  <div *ngIf="p.estadoDocumento === 'Sin Documento'">
+                                                    <div class="main-content">
+                                                        <div class="container-fluid">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="card">
+                                                                        <div class="card-header card-header-info">
+                                                                            <h4 class="card-title">Documento de validación</h4>
+                                                                        </div>
+                                                      
+                                                                            <div class="card mb-3">
+                                                                                <div class="row no-gutters">
+                                                                                  <div class="col-md-12">
+                                                                                        <div class="col-md-12" *ngIf="p.estadoDocumento === 'Sin Documento'">
+                                                                                            <form [formGroup]="newDocForm" (ngSubmit)="addDocumento(p)" class="container">
+                                                                                                <p>Debes agregar un documento que verifique que tu restaurante es válido.</p>
+                                                                                                <p><b>Ejemplo:</b> Fotos del establecimiento por fuera, patente, o algún documento que valide que eres dueño del mismo.</p>
+                                                                                                <p>El administrador revisará el documento y validará tu restaurante en un lapso de 24 horas.</p>
+                                                                                                <mat-divider></mat-divider><br>
+
+                                                                                                <button mat-raised-button class="agregarDoc" onclick="document.getElementById('subida').click()" type="button">Agregar</button>
+                                                                                                <p class="limite">Tamaño máximo 5 Mb</p>
+                                                                                                <input id="subida" type="file"  accept=".docx, .pdf, .png, .jpg, .jpeg" style="display: none" (change)="seleccionar_doc($event)">
+                                                                                                <p style="text-align: center;">{{labelFile}}</p>
+
+                                                                                                    
+                                                                                                <div *ngIf="isSubmitted" style="text-align: center;">
+                                                                                                    <button mat-raised-button color="info" type="submit">
+                                                                                                        <mat-icon>done</mat-icon>
+                                                                                                        <span>Aceptar</span>
+                                                                                                    </button>
+                                                                                                    &nbsp;
+                                                                                                    <button mat-raised-button color="info" (click)="resetForm()">
+                                                                                                        <mat-icon>close</mat-icon>
+                                                                                                        <span>Cancelar</span>
+                                                                                                    </button>
+                                                                                                </div>
+
+                                                                                            </form>
+                                                                                        </div>
+                                                                                  </div>
+                                                                                </div>
+                                                                            </div>
+                                                                      
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div *ngIf="p.estadoDocumento === 'documento Rechazado' || p.resVerificado === 'Rechazado'">
+                                                    <div class="main-content">
+        
+                                                        <div class="container-fluid">
+                                                            <div class="row">
+                                                                <div class="col-md-12">
+                                                                    <div class="card">
+                                                                        <div class="card-header card-header-info">
+                                                                            <h4 class="card-title">Documento de validación</h4>
+                                                                            
+                                                                        </div>
+                                                                            <div class="card mb-3">
+                                                                                <div class="row no-gutters">
+                                                                                  <div class="col-md-12 ">
+                                                                                    <div class="card-body">
+                                                                                        <form [formGroup]="newDocForm" (ngSubmit)="addDocumento(p)" class="container">
+                                                                                            <h5><b>Tu documento ha sido rechado.</b></h5>
+                                                                                            <p>El administrador no puede verificar que el restaurante exista o seas dueño del mismo.</p>
+                                                                                            <p>Agrega un documento que pruebe que tu restaurante es válido</p>
+                                                                                            <p><b>Ejemplo:</b> Fotos del establecimiento por fuera, patente, o algún documento que valide que eres dueño del mismo.</p>
+                                                                                            <p>El administrador revisará el documento y validará tu restaurante en un lapso de 24 horas.</p>
+                                                                                            <mat-divider></mat-divider>
+
+                                                                                            <button mat-raised-button class="agregarDoc" onclick="document.getElementById('subida2').click()" type="button">Agregar</button>
+                                                                                            <p class="limite">Tamaño máximo 5 Mb</p>
+                                                                                            <input id="subida2" type="file"  accept=".docx, .pdf, .png, .jpg, .jpeg" style="display: none" (change)="seleccionar_doc($event)">
+                                                                                            <p style="text-align: center;">{{labelFile}}</p>
+
+                                                                                                
+                                                                                            <div *ngIf="isSubmitted" style="text-align: center;">
+                                                                                                <button mat-raised-button color="info" type="submit">
+                                                                                                    <mat-icon>done</mat-icon>
+                                                                                                    <span>Aceptar</span>
+                                                                                                </button>
+                                                                                                &nbsp;
+                                                                                                <button mat-raised-button color="info" (click)="resetForm()">
+                                                                                                    <mat-icon>close</mat-icon>
+                                                                                                    <span>Cancelar</span>
+                                                                                                </button>
+                                                                                                <br>
+                                                                                            </div>
+
+                                                                                        </form>
+                                                                                    </div>
+                                                                                  </div>
+                                                                                </div>
+                                                                            </div>
+                                                                      
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                              </ng-template>
+                                              <ng-template [ngIf]="validacionMapa(valorMapa) === false">
+                                                <div class="main-content">
+                                                    <div class="container-fluid">
+                                                        <div class="row">
+                                                            <div class="col-md-12">
+                                                                <div class="card">
+                                                                    <div class="card-header card-header-info">
+                                                                        <h4 class="card-title">Agregar ubicación</h4>
+                                                                    </div>
+                                                  
+                                                                        <div class="card mb-3">
+                                                                            <div class="row no-gutters">
+                                                                              <div class="col-md-12">
+                                                                                    <div class="col-md-12">
+                                                                                        <p>Antes de validar tu información, debes agregar la ubicación exacta de tu restaurante para que la misma sea reflejada en la aplicación móvil</p>                                                                                        
+                                                                                        <button class="btn" (click)="editarMapa()">Agregar</button>
+                                                                                        
+                                                                                    </div>
+                                                                              </div>
+                                                                            </div>
+                                                                        </div>
+                                                                  
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </ng-template>
+                                              
+                                             
+                                          </div>
+                                            <div class="col-md-2">
+                                            
+                                            </div>
+                                            
+                                        </div>
+
+                                        
+                                        <div class="main-content">
+                                            <div class="container-fluid">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="card">
+                                                            <div class="card-header card-header-info">
+                                                                <h4 class="card-title">Estadísticas
+                                                                </h4>
+                                                            </div>
+                                                            <div class="card-body" >
+                                                                        <div class="row">
+                                                                            <div class="col-lg-3 col-md-6 col-sm-6">
+                                                                                <div class="card card-stats">
+                                                                                    <div class="card-header card-header-warning card-header-icon">
+                                                                                        <div class="card-icon">
+                                                                                            <i class="material-icons">announcement</i>
+                                                                                        </div>
+                                                                                        <p class="card-category" style="font-size: 12px;">Opiniones</p>
+                                                                                        <h3 class="card-title">{{totalComentariosDueno}}
+                                                                                            <!-- <small>opiniones</small> -->
+                                                                                        </h3>
+                                                                                    </div>
+                                                                                    <div class="card-footer">
+                                                                                        <div class="stats">
+                                                                                        <i class="material-icons">date_range</i> Desde el 22/11/2020
+                                                                                        
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-lg-3 col-md-6 col-sm-6">
+                                                                                <div class="card card-stats">
+                                                                                    <div class="card-header card-header-success card-header-icon">
+                                                                                        <div class="card-icon">
+                                                                                            <i class="material-icons">record_voice_over</i>
+                                                                                        </div>
+                                                                                        <p class="card-category" style="font-size: 12px;">Quejas</p>
+                                                                                        <h3 class="card-title">{{totalquejas}}</h3>
+                                                                                    </div>
+                                                                                    <div class="card-footer">
+                                                                                        <div class="stats">
+                                                                                        <i class="material-icons">date_range</i> Desde el 22/11/2020
+                                                                
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-lg-3 col-md-6 col-sm-6">
+                                                                                <div class="card card-stats">
+                                                                                    <div class="card-header card-header-danger card-header-icon">
+                                                                                        <div class="card-icon">
+                                                                                            <i class="material-icons">info_outline</i>
+                                                                                        </div>
+                                                                                        <p class="card-category" style="font-size: 12px;">Sugerencias</p>
+                                                                                        <h3 class="card-title">{{totalsugerencias}}</h3>
+                                                                                    </div>
+                                                                                    <div class="card-footer">
+                                                                                        <div class="stats">
+                                                                                        <i class="material-icons">date_range</i> Desde el 22/11/2020
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                            <div class="col-lg-3 col-md-6 col-sm-6">
+                                                                                <div class="card card-stats">
+                                                                                    <div class="card-header card-header-info card-header-icon">
+                                                                                        <div class="card-icon">
+                                                                                            <i class="material-icons">group_add</i>
+                                                                                        </div>
+                                                                                        <p class="card-category" style="font-size: 12px;">Afiliados</p>
+                                                                                        <h3 class="card-title">{{totalAfiliados}}</h3>
+                                                                                    </div>
+                                                                                    <div class="card-footer">
+                                                                                        <div class="stats">
+                                                                                        <i class="material-icons">date_range</i> Desde el 22/11/2020
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+
+                                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div> 
+                                        </div>
+
+                                        </div>
+                                        
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+            
+        </div>   
+        </div>
+    </div>
+</ng-template >
+

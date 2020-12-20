@@ -1,0 +1,29 @@
+.example-card {
+    max-width: 300px;
+    display: inline-block;  
+    border-radius: 21px;
+    margin: 10px;
+  }
+
+.card-body1{
+  width: 50%;
+}
+
+.card-1{
+  width: 50%;
+}
+
+.card-img2{
+  width: 45%;
+  margin-left: 25%;
+  border-radius: calc(0.25rem - 1px);
+}
+
+.btn{
+  background-color: #3c4752;
+  text-transform: capitalize;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  width: 40%;
+  margin-left: 30%;
+}

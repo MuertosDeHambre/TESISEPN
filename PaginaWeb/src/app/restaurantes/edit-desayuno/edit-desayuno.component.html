@@ -1,0 +1,57 @@
+<div class="restaurante-container">
+
+    <form [formGroup]="miform" (ngSubmit)="editMenu(miform.value)" class="container">
+        <mat-form-field>
+            <mat-label>Estado del menú</mat-label>
+            <mat-select placeholder="Tags" formControlName="estado">
+                <mat-option value="Activo">Activo</mat-option>
+                <mat-option value="Deshabilitado">Desactivado</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Tipo de desayuno" formControlName="platoDesayuno" type="text" autocomplete="off" maxlength="40">
+            <div *ngIf="miform.get('platoDesayuno').errors && miform.get('platoDesayuno').dirty " >
+                <p class="e" *ngIf="miform.get('platoDesayuno').hasError('required')">El campo no debe estar vacio</p>
+                <p class="e" *ngIf="miform.get('platoDesayuno').hasError('pattern')">El campo debe contener numeros</p>
+            </div>
+        </mat-form-field>
+    
+        <mat-form-field class="example-full-width">
+            <input matInput placeholder="Nombre del plato" formControlName="detalleDesayuno" maxlength="40" >
+            <div *ngIf="miform.get('detalleDesayuno').errors && miform.get('detalleDesayuno').dirty" >
+                <p class="e" *ngIf="miform.get('detalleDesayuno').hasError('required')">El campo no puede estar vacio</p>
+            </div>
+        </mat-form-field>
+    
+        <mat-form-field class="example-full-width">
+                <input matInput placeholder="Precio" formControlName="precioDesayuno" autocomplete="off" required maxlength="5">
+                <div *ngIf="miform.get('precioDesayuno').errors && miform.get('precioDesayuno').dirty " >
+                    <p class="e" *ngIf="miform.get('precioDesayuno').hasError('required')">El campo no debe estar vacio</p>
+                    <p class="e" *ngIf="miform.get('precioDesayuno').hasError('pattern')">El campo debe contener numeros</p>
+                </div>
+        </mat-form-field>
+        
+        <div formArrayName="ingredientes">
+        <mat-label style="color: grey;">Ingredientes</mat-label><br>
+          <div *ngFor="let person of IngredienteArray.controls; let i = index;">
+            <div [formGroupName]="i">
+              <input type="text" formControlName="ingrediente" maxlength="40"><button mat-raised-button color="info" (click)="removeIngrediente(i)">Eliminar</button>
+              
+            </div>
+          </div>
+          <a class="add" type="button" (click)="addIngredientes()"><mat-icon>add_circle</mat-icon>&nbsp; Agregar</a>
+        </div>
+        <button mat-raised-button color="primary" type="submit" [mat-dialog-close]="true" [disabled]="miform.invalid">
+            <mat-icon>done</mat-icon>
+            <span>Aceptar</span>
+        </button>
+    
+        <button mat-raised-button color="accent" type="button"  [mat-dialog-close]="true" (click)="cancelar($event)">
+            <mat-icon>close</mat-icon>
+            <span>Cancelar</span>
+        </button>
+    </form>
+    
+    
+</div>

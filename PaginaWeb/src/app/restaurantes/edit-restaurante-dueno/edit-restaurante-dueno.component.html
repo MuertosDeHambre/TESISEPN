@@ -1,0 +1,125 @@
+<div class="restaurante-container">
+
+
+    <form [formGroup]="editResForm" (ngSubmit)="editPerfil(editResForm.value)" class="container" >
+        <mat-tab-group mat-align-tabs="center">
+            <mat-tab label="1">
+                <br>
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Nombre del Restaurante" formControlName="nombreRestaurante" required>
+                    <div *ngIf="editResForm.get('nombreRestaurante').errors && editResForm.get('nombreRestaurante').dirty " maxlength="40">
+                        <p class="e" *ngIf="editResForm.get('nombreRestaurante').hasError('required')">El campo no debe estar vacio</p>
+                        <p class="e" *ngIf="editResForm.get('nombreRestaurante').hasError('minlength')">Minimo 3 caracteres</p>
+                        <p class="e" *ngIf="editResForm.get('nombreRestaurante').hasError('maxlength')">Maximo 35 caracteres</p>
+                    </div>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <mat-label>Tipo Restaurante</mat-label>
+                    <mat-select [(value)]="selected" placeholder="Tipo de restaurante" formControlName="tipoRestaurante" required>
+                        <mat-option value="Restaurante">Restaurante</mat-option>
+                        <mat-option value="Kioscos de comida">Kioscos de comida</mat-option>
+                    </mat-select>
+                    <div *ngIf="editResForm.get('tipoRestaurante').errors && editResForm.get('tipoRestaurante').dirty " maxlength="40">
+                        <p class="e" *ngIf="editResForm.get('tipoRestaurante').hasError('required')">El campo no debe estar vacio</p>
+                        <p class="e" *ngIf="editResForm.get('tipoRestaurante').hasError('minlength')">Minimo 3 caracteres</p>
+                        <!-- <p class="e" *ngIf="editResForm.get('tipoRestaurante').hasError('email')">Debe ser un email valido</p> PRUEBA DE EMAIL-->
+                        <p class="e" *ngIf="editResForm.get('tipoRestaurante').hasError('maxlength')">Maximo 35 caracteres</p>
+                    </div>
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Hora de Apertura (hh:mm)" type="text"  formControlName="horaApertura" required>
+                    <div *ngIf="editResForm.get('horaApertura').errors && editResForm.get('horaApertura').dirty " >
+                        <p class="e" *ngIf="editResForm.get('horaApertura').hasError('required')">El campo no puede estar vacio</p>
+                        <p class="e" *ngIf="editResForm.get('horaApertura').hasError('pattern')">hora mínima de apertura: 06:00 - 11:59 </p>
+                        <!-- <p class="e" *ngIf="editResForm.get('horaApertura').hasError('pattern')">Hora de Apertura: 00:01 - 11.59 AM</p> -->
+                    </div>
+                </mat-form-field>
+        
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Hora de Cierre (hh:mm)" type="text" formControlName="horaCierre" required>
+                    <div *ngIf="editResForm.get('horaCierre').errors && editResForm.get('horaCierre').dirty">
+                        <p class="e" *ngIf="editResForm.get('horaCierre').hasError('required')">El campo no debe estar vacio</p>
+                        <p class="e" *ngIf="editResForm.get('horaCierre').hasError('pattern')">hora mínima de apertura: 12:00 - 23:59 </p>
+                    </div>
+                    
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Dirección del Restaurante" formControlName="direccionRestaurante" required maxlength="51">
+                    <div *ngIf="editResForm.get('direccionRestaurante').errors && editResForm.get('direccionRestaurante').dirty " >
+                        <p class="e" *ngIf="editResForm.get('direccionRestaurante').hasError('required')">El campo no debe estar vacio</p>
+                        <p class="e" *ngIf="editResForm.get('direccionRestaurante').hasError('minlength')">Minimo 3 caracteres</p>
+                        <p class="e" *ngIf="editResForm.get('direccionRestaurante').hasError('maxlength')">Maximo 50 caracteres</p>
+                    </div>
+                </mat-form-field>
+                <div style="text-align: center;">
+                    <a mat-raised-button tabindex="-1" type="button" 
+                    class="btn" (click)='moveToSelectedTab("2")'>Siguiente</a>
+                </div>
+            </mat-tab>
+
+            <mat-tab label="2"><br>
+                
+        
+                <ng-template [ngIf]= "selected === 'Kioscos de comida'">
+                    
+                </ng-template>
+                <ng-template [ngIf]= "selected === 'Restaurante'">
+                    <mat-form-field class="example-full-width">
+                        <input matInput  placeholder="Capacidad del Restaurante (Aforo máximo)" formControlName="capacidadRestaurante" maxlength="3" required>
+                        <div *ngIf="editResForm.get('capacidadRestaurante').errors">
+                            <p class="e" *ngIf="editResForm.get('capacidadRestaurante').hasError('maxlength')">Aforo máximo 99 personas</p>
+                            <p class="e" *ngIf="editResForm.get('capacidadRestaurante').hasError('pattern')">El campo debe contener numeros</p>
+
+                        </div>
+                    </mat-form-field>
+        
+                </ng-template>
+                <!-- <div style="text-align: center;" *ngIf="perfil.imagenRes">
+                    <img  [src]="perfil.imagenRes" alt="Foto" width="30%">
+                </div> -->
+
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Facebook (/user)" autocomplete="off" formControlName="socialF" maxlength="35">
+                    <div *ngIf="editResForm.get('socialF').errors && editResForm.get('socialF').dirty " >
+                        <p class="e" *ngIf="editResForm.get('socialF').hasError('maxlength')">Maximo 30 caracteres</p>
+                    </div>
+                </mat-form-field>
+                <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Instagram (/user)*" autocomplete="off" formControlName="socialG" maxlength="35">
+                    <div *ngIf="editResForm.get('socialG').errors && editResForm.get('socialG').dirty " >
+                        <p class="e" *ngIf="editResForm.get('socialG').hasError('maxlength')">Maximo 30 caracteres</p>
+                    </div>
+                </mat-form-field>
+
+                <div style="text-align: center;"> 
+                    <button mat-raised-button onclick="document.getElementById('input_subida').click()" type="button"><mat-icon>cloud_upload</mat-icon>  <span>Foto Restaurante</span></button>
+                    <p class="limite">Tamaño maximo 6 Mb</p>
+                    <input id="input_subida"  type="file" style="display: none" formControlName="fotoRes" (change)="seleccionar_foto($event)">
+            
+                    <p>{{labelImage}}</p>
+
+                    <button mat-raised-button color="primary" type="submit" [disabled]="editResForm.invalid" [mat-dialog-close]="true">
+                        <mat-icon>done</mat-icon>
+                        <span>Aceptar</span>
+                    </button>
+            
+                
+                    <button mat-raised-button color="accent" type="button" [mat-dialog-close]="true" (click)="cancelar($event)">
+                        <mat-icon>close</mat-icon>
+                        <span>Cancelar</span>
+                    </button><br><hr>
+                    <a mat-raised-button tabindex="-1" type="button" 
+                    class="btn" (click)='moveToSelectedTab("1")'>Anterior</a>
+                </div>
+            </mat-tab>
+    </mat-tab-group>
+                
+        
+</form>
+                
+       
+            <p class="m">(*) Campos obligatorios</p>
+
+</div>

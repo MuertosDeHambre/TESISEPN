@@ -1,0 +1,26 @@
+<div>
+    <form [formGroup]="newPromoForm" (ngSubmit)="addPromocion(newPromoForm.value)" class="container">
+        
+        
+        <button class="btn" onclick="document.getElementById('input_subida').click()" type="button">Agregar</button>
+        <input id="input_subida" type="file"  accept=".png, .jpg, .jpeg" style="display: none" (change)="seleccionar_promo($event)">
+        
+        <p>{{labelFile}}</p>
+
+        <div *ngIf="isSubmitted">
+            <button mat-raised-button color="primary" type="submit">
+                <mat-icon>done</mat-icon>
+                <span>Aceptar</span>
+            </button>
+            &nbsp;
+        
+            <button mat-raised-button color="accent" type="button" (click)="resetForm()">
+                <mat-icon>close</mat-icon>
+                <span>Cancelar</span>
+            </button>
+        </div>
+        
+    </form>  
+</div>
+
+

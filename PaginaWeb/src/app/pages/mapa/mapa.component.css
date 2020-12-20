@@ -1,0 +1,29 @@
+.map-container {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    right: 0;
+    bottom: 18px;
+    margin: 80px;
+  }
+  
+  .map-frame {
+    border: 400px solid black;
+    height: 100%;
+  }
+  
+  #mapa {
+    position: static;
+    bottom: 519px;
+    left: 200px;
+    height: 60%;
+    width: 60%;
+  }
+  .btn{
+    background-color: #3c4752;
+    text-transform: capitalize;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    width: 20%;
+    /* margin-left: 30%; */
+  }

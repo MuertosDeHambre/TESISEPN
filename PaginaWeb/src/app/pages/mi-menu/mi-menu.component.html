@@ -1,0 +1,573 @@
+
+        <ng-template [ngIf]="estadoRestauranteActual(estadoRestaurante) == true">
+                
+            <div *ngIf="validacionRestauranteExiste(valorRestaurante) == false; else validacionRestaurante">
+                <div class="main-content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="card">
+                                    <div class="card-header card-header-info">
+                                        <h4 class="card-title">Agregar información</h4>
+                                    </div>
+                                    <div class="card-body">
+                  
+                                        <div class="card mb-3">
+                                            <div class="row no-gutters">
+                                              <div class="col-md-4">
+                                                 <img src="../../../assets/img/icono_clientes.svg" class="card-img2" alt="about.id">
+                                              </div>
+                                              <div class="col-md-8">
+                                                <div class="card-body">
+                                                    <p>Debes agregar información de tu restaurante primero</p>
+                                                    <p>Ir a -> Restaurante</p>
+                                                </div>
+                                              </div>
+                                            </div>
+                                        </div>
+                                  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                <ng-template #validacionRestaurante>
+                    <div *ngFor="let p of perfil$ | async">
+                        <div *ngIf="usuarioLog == p.userUID">
+                            <div *ngIf="p.estadoDocumento.toString() ==='Sin Documento' ;else verificacionRes">
+                                <div class="main-content">
+                                    <div class="container-fluid">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="card">
+                                                    <div class="card-header card-header-info">
+                                                        <h4 class="card-title">Restaurante</h4>
+                                                    </div>
+                                                    <div class="card-body">
+                                  
+                                                        <div class="card mb-3">
+                                                            <div class="row no-gutters">
+                                                              <div class="col-md-4">
+                                                                 <img src="../../../assets/img/icono_clientes.svg" class="card-img2" alt="about.id">
+                                                              </div>
+                                                              <div class="col-md-8">
+                                                                <div class="card-body">
+                                                                    <app-validacion></app-validacion>
+                                                                </div>
+                                                              </div>
+                                                            </div>
+                                                        </div>
+                                                  
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+
+                    </div>
+                    
+                    
+                    <ng-template #verificacionRes>
+                        <div *ngFor="let perfil of perfil$ | async ">
+                            <div *ngIf="usuarioLog == perfil.userUID">
+                                <ng-template [ngIf]="perfil.estadoDocumento.toString() === 'documento en Revision'">
+                                    <div class="main-content">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="card">
+                                                        <div class="card-header card-header-info">
+                                                            <h4 class="card-title">Documento en revisión</h4>
+                                                        </div>
+                                                        <div class="card-body">
+                                      
+                                                            <div class="card mb-3">
+                                                                <div class="row no-gutters">
+                                                                  <div class="col-md-4">
+                                                                     <img src="../../../assets/img/icono_clientes.svg" class="card-img2" alt="about.id">
+                                                                  </div>
+                                                                  <div class="col-md-8">
+                                                                    <div class="card-body">
+                                                                        <p>Tu restaurante esta siendo revisado por el administrador.</p>
+                                                                    </div>
+                                                                  </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                                <ng-template [ngIf]="perfil.estadoDocumento.toString() === 'documento Rechazado'">
+                                    <div class="main-content">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="card">
+                                                        <div class="card-header card-header-info">
+                                                            <h4 class="card-title">Documento rechazado</h4>
+                                                        </div>
+                                                        <div class="card-body">
+                                      
+                                                            <div class="card mb-3">
+                                                                <div class="row no-gutters">
+                                                                  <div class="col-md-4">
+                                                                     <img src="../../../assets/img/icono_clientes.svg" class="card-img2" alt="about.id">
+                                                                  </div>
+                                                                  <div class="col-md-8">
+                                                                    <div class="card-body">
+                                                                        <app-validacion></app-validacion>
+                                                                    </div>
+                                                                  </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                                <ng-template [ngIf]="perfil.estadoDocumento.toString() === 'documento Aprobado' && perfil.resVerificado.toString() === 'En revision'">
+                                    <div class="main-content">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="card">
+                                                        <div class="card-header card-header-info">
+                                                            <h4 class="card-title">Documento aprobado</h4>
+                                                        </div>
+                                                        <div class="card-body">
+                                      
+                                                            <div class="card mb-3">
+                                                                <div class="row no-gutters">
+                                                                  <div class="col-md-4">
+                                                                     <img src="../../../assets/img/icono_clientes.svg" class="card-img2" alt="about.id">
+                                                                  </div>
+                                                                  <div class="col-md-8">
+                                                                    <div class="card-body">
+                                                                        <p>Tu restaurante ha sido <b>aprobado</b>. En unos minutos será habilitado </p>
+                                                                    </div>
+                                                                  </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                                <ng-template [ngIf]="perfil.resVerificado.toString() === 'Aprobado' && perfil.estadoDocumento.toString() ==='documento Aprobado'">
+                                    <div class="main-content">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="card">
+                                                        <div class="card-header card-header-info">
+                                                            <h4 class="card-title">Menú del día </h4>
+                                                        </div>
+                                                        <mat-tab-group mat-align-tabs="center">
+                                                            <mat-tab label="Desayuno">
+                                                                <div class="card mb-3">
+                                                                    <div class="row no-gutters">
+                                                                      <div class="col-md-12">
+                                                                        <div class="card-body">
+                                                                            <div style="text-align: center;">
+                                                                                <button class="btn" (click)="nuevoDesayuno()">
+                                                                                    Agregar
+                                                                                </button>&nbsp;
+                                                                                <button  class="btn" (click)="editMenu()">
+                                                                                    Editar
+                                                                                </button>
+                                                                            </div>
+                                                                            <hr>
+                                                                            <br>
+                                                                            <ng-template [ngIf]="validacionDes(valorD) === true">
+                                                                                <div class="row" style="text-align: center;">
+                                                                                    <div  *ngFor="let platoD of platoDes$ | async ">
+                                                                                        <div class="col-md-12 mx-auto" *ngIf="usuarioLog == platoD.userUID && platoD.estado === 'Activo'">
+                                                                                            <div class="card card-profile" style="width: 300px;">
+                                                                                                <div class="card-avatar">
+                                                                                                <a>
+                                                                                                <img class="img" src="../../../assets/img/desayuno.jpg"/>
+                                                                                                </a>
+                                                                                                </div>
+                                                                                                <div class="card-body">
+                                                                                                    <h4 class="card-category">Desayuno</h4><hr>
+                                                                                                    <h4 style="text-align: left;">
+                                                                                                    <b >Tipo:</b>
+                                                                                                    </h4> 
+                                                                                                    <h4>{{platoD.platoDesayuno}}</h4>
+                                                                                                    <h4 style="text-align: left;">
+                                                                                                    <b>Detalle Desayuno</b>
+                                                                                                    </h4> 
+                                                                                                    <h4>{{platoD.detalleDesayuno}}</h4>
+
+                                                                                                    <h4 style="text-align: left;">
+                                                                                                    <b >Precio:</b>
+                                                                                                    </h4> 
+                                                                                                    <h4>{{platoD.precioDesayuno}}</h4>
+
+                                                                                                    <h4 style="text-align: left;">
+                                                                                                    <b >Tipo:</b>
+                                                                                                    </h4> 
+                                                                                                    <h4>{{platoD.platoDesayuno}}</h4>
+                                                                                                    <h4 style="text-align: left;">
+                                                                                                    <b>Ingredientes</b>
+                                                                                                    <br>
+                                                                                                    <div class="col-md-12" style="text-align: center;">
+                                                                                                    <div *ngFor="let ing of platoD.ingredientes; let i=index">
+                                                                                                        <h4>
+                                                                                                            - {{ing['ingrediente']}}
+                                                                                                        </h4>
+                                                                                                        
+                                                                                                    </div>
+                                                                                                    </div>
+                                                                                                    </h4>
+                                                                                                    <hr>
+                                                                                                              <!-- <mat-card-actions>
+                                                                                                                <button mat-button>
+    
+                                                                                                                </button>
+                                                                                                                
+                                                                                                            </mat-card-actions> -->
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div> 
+                                                                                </div>
+                                                                            </ng-template>
+                                                                        </div>
+                                                                      </div>
+                                                                    </div>
+                                                                </div>
+                                                            </mat-tab>
+                                                            <mat-tab label="Almuerzo">
+                                                                <div class="card mb-3">
+                                                                    <div class="row no-gutters">
+                                                                      <div class="col-md-12">
+                                                                        <div class="card-body">
+                                                                            <div style="text-align: center;">
+                                                                                <button class="btn" (click)="nuevoAlmuerzo()">
+                                                                                    Agregar
+                                                                                </button>&nbsp;
+                                                                                <button  class="btn" (click)="editAlmuerzoMenu()">
+                                                                                    Editar
+                                                                                </button>
+                                                                            </div>
+                                                                            <!-- <div class="row">
+                                                                                <div class="col-md-4"></div>
+
+                                                                                <div class="col-md-2">
+                                                                                    <button  mat-stroked-button (click)="nuevoAlmuerzo()">
+                                                                                        <mat-icon>note_add</mat-icon>&nbsp; Agregar Almuerzo
+                                                                                    </button>
+                                                                                </div>&nbsp;&nbsp;&nbsp;
+                                                                                <div class="col-md-2">
+                                                                                    <button  mat-stroked-button (click)="editAlmuerzoMenu()">
+                                                                                        <mat-icon>note_add</mat-icon>&nbsp; Editar Almuerzo
+                                                                                    </button>
+                                                                                
+                                                                                </div>
+                                                                                    
+                                                                                <div class="col-md-4"></div>
+
+                                                                            </div> -->
+                                                                            <hr><br>
+                                                                                    <ng-template  [ngIf]="validacionAlm(valorA) === true">
+                                                                                        <div class="row" style="text-align: center;">
+                                                                                            <div  *ngFor="let platoA of platoAlm$ | async ">
+                                                                                                <div class="col-md-12 mx-auto" *ngIf="usuarioLog == platoA.userUID && platoA.estado === 'Activo'">
+                                                                                                        <div class="card card-profile" style="width: 300px;">
+                                                                                                            <div class="card-avatar">
+                                                                                                              <a>
+                                                                                                                <img class="img" src="../../../assets/img/almuerz.png"/>
+                                                                                                              </a>
+                                                                                                            </div>
+                                                                                                            <div class="card-body">
+                                                                                                              <h4 class="card-category">
+                                                                                                                
+                                                                                                                  Almuerzo
+                                                                                                                  </h4><hr>
+                                                                                            
+                                                                                                               
+                                                                                                                
+                                                                                                              <h4 style="text-align: left;"> 
+                                                                                                                  <b>Tipo:</b><br>
+                                                                                                                  </h4>
+                                                                                                                  <h4>{{platoA.tipoAlmuerzo}}</h4>
+
+                                                                                                              <h4 style="text-align: left;">
+                                                                                                                
+                                                                                                                 <b>Entrada:</b><br> 
+                                                                                                               
+                                                                                                                    </h4>
+                                                                                                                    <h4>{{platoA.entradaAlmuerzo}}
+                                                                                                              </h4>
+                                                                                                              <h4 style="text-align: left;">
+                                                                                                                
+                                                                                                                <b>Segundo:</b><br>
+                                                                                                                
+                                                                                                                </h4>
+                                                                                                                <h4>{{platoA.segundoAlmuerzo}}
+                                                                                                              </h4>
+                                                                                                              <h4 style="text-align: left;">
+                                                                                                                
+                                                                                                                <b>Bebida:</b><br>
+                                                                                                                
+                                                                                                                </h4>
+                                                                                                                <h4>{{platoA.jugoAlmuerzo}}
+                                                                                                              </h4>
+                                                                                                              <h4 style="text-align: left;">
+                                                                                                                  <b>Precio: </b> 
+                                                                                                                </h4>
+                                                                                                                <h4>{{platoA.precioAlmuerzo}} &nbsp;$
+                                                                                                              </h4>
+                                                                                                              <hr>
+                                                                                                            </div>
+                                                                                                          </div>
+                                                                                                </div>
+                                                                                                
+                                                                                            </div> 
+                                                                                        </div>
+                                                                            </ng-template>
+                                                                        </div>
+                                                                      </div>
+                                                                     
+                                                                    </div>
+                                                                </div>
+
+                                                                <!-- <div class="card mb-3">
+                                                                    <div class="row no-gutters">
+                                                                      <div class="col-md-4">
+                                                                        <div class="card-body">
+                                                                            <button mat-stroked-button (click)="nuevoAlmuerzo()">
+                                                                                <mat-icon>note_add</mat-icon>&nbsp; Agregar Almuerzo
+                                                                            </button>&nbsp;&nbsp;&nbsp;<br>
+                                                                            <ng-template [ngIf]="validacionAlm(valorA) === true">
+                                                                                <div  *ngFor="let platoA of platoAlm$ | async ">
+                                                                                    <div *ngIf="usuarioLog == platoA.userUID">
+                                                                                        <div>
+                                                                                            <div class="card card-profile">
+                                                                                                <div class="card-avatar">
+                                                                                                  <a>
+                                                                                                    <img class="img" src="../../../assets/img/almuerz.png"/>
+                                                                                                  </a>
+                                                                                                </div>
+                                                                                                <div class="card-body">
+                                                                                                  <h4 class="card-category">Almuerzo del día</h4><hr>
+                                                                                                  <mat-icon>fastfood</mat-icon>
+                                                                                                    &nbsp;&nbsp; Entrada  &nbsp;&nbsp;
+                                                                                                    <mat-icon>fastfood</mat-icon><br>
+                                                                                                  <h4 class="card-title">{{platoA.entradaAlmuerzo}}</h4>
+                                                                                                  <h4 class="card-title">
+                                                                                                    <mat-icon>local_dining</mat-icon>
+                                                                                                    &nbsp;&nbsp; Segundo &nbsp;&nbsp;
+                                                                                                    <mat-icon>local_dining</mat-icon><br>
+                                                                                                    {{platoA.segundoAlmuerzo}}
+                                                                                                  </h4>
+                                                                                                  <h4 class="card-title">
+                                                                                                    <mat-icon>local_dining</mat-icon>
+                                                                                                    &nbsp;&nbsp; Jugo &nbsp;&nbsp;
+                                                                                                    <mat-icon>local_dining</mat-icon><br>
+                                                                                                    {{platoA.jugoAlmuerzo}}
+                                                                                                  </h4>
+                                                                                                  <h4 class="card-title">
+                                                                                                    <mat-icon>attach_money</mat-icon>
+                                                                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Precio &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                                    <mat-icon>attach_money</mat-icon><br>
+                                                                                                    {{platoA.precioAlmuerzo}} &nbsp;$
+                                                                                                  </h4>
+
+                                                                                                  <hr>
+                                                                                                  <mat-card-actions>
+                                                                                                    <button mat-button>
+                                                                                                        <app-editar-almuerzo></app-editar-almuerzo>
+
+                                                                                                    </button>
+                                                                                                    
+                                                                                                </mat-card-actions>
+                                                                                                </div>
+                                                                                              </div>
+                                                                                        </div>
+
+                                                                                    </div>
+                                                                                </div>
+                                                                            </ng-template>
+                                                                        </div>
+                                                                      </div>
+                                                                    </div>
+                                                                </div> -->
+
+
+                                                            </mat-tab>
+                                                            <mat-tab label="Plato especial">
+
+                                                                <div class="card mb-3">
+                                                                    <div class="row no-gutters">
+                                                                      <div class="col-md-12">
+                                                                        <div class="card-body">
+                                                                            <div style="text-align: center;">
+                                                                                <button class="btn" (click)="nuevaMerienda()">
+                                                                                    Agregar
+                                                                                </button>&nbsp;
+                                                                                <button  class="btn" (click)="editEspecialMenu()">
+                                                                                    Editar
+                                                                                </button>
+                                                                            </div>
+                                                                            <hr><br>
+                                                                            <ng-template [ngIf]="validacionMer(valorM) === true">
+                                                                                        <div class="row" style="text-align: center;">
+                                                                                            <div   *ngFor="let platoM of platoMer$ | async ">
+                                                                                                <div class="col-md-12 mx-auto" *ngIf="usuarioLog == platoM.userUID && platoM.estado === 'Activo'">
+                                                                                                        <div class="card card-profile" style="width: 300px;">
+                                                                                                            <div class="card-avatar">
+                                                                                                              <a>
+                                                                                                                <img class="img" src="../../../assets/img/food1.jpg"/>
+                                                                                                              </a>
+                                                                                                            </div>
+                                                                                                            <div class="card-body">
+                                                                                                                <h4 class="card-category">Plato Especial</h4><hr>
+                                                                                                                
+                                                                                                                <h4 style="text-align: left;">
+                                                                                                                  <b>Nombre:</b>
+                                                                                                                  <br>
+                                                                                                                  </h4>
+                                                                                                                  <h4>{{platoM.platoEspecial}}
+                                                                                                                </h4>
+          
+                                                                                                                <h4 style="text-align: left;">
+                                                                                                                  <b>Precio:</b>
+                                                                                                                <br>
+                                                                                                                  </h4>
+                                                                                                                  <h4>{{platoM.precioEspecial}} &nbsp;$
+                                                                                                                </h4>
+                                                                                                                <h4 style="text-align: left;">
+                                                                                                                  <b>Ingredientes:</b>
+                                                                                                                  
+                                                                                                                  <div class="col-md-12" style="text-align: center;">
+                                                                                                                      <div *ngFor="let ing of platoM.ingredientes; let i=index">
+                                                                                                                          <h4> - {{ing['ingrediente']}}</h4>
+                                                                                                                      </div>
+                                                                                                                  </div>
+                                                                                                                </h4>
+              
+                                                                                                                
+                                                                                                              </div>
+                                                                                                          </div>
+                                                                                                   
+    
+    
+                                                                                                </div>
+                                                                                                
+                                                                                            </div> 
+                                                                                            <!-- <app-editar-desayuno></app-editar-desayuno> -->
+
+                                                                                        </div>
+                                                                                        
+                                                                                    </ng-template>
+                                                                        </div>
+                                                                      </div>
+                                                                     
+                                                                    </div>
+                                                                </div>
+                                                               
+                                                            </mat-tab>
+
+                                                          </mat-tab-group>
+                                                       </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                                <ng-template [ngIf]="perfil.resVerificado.toString() === 'Rechazado' || perfil.estadoDocumento.toString() === 'documento Rechazado'">
+                                    <div class="main-content">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="card">
+                                                        <div class="card-header card-header-info">
+                                                            <h4 class="card-title">Restaurante rechazado</h4>
+                                                        </div>
+                                                        <div class="card-body">
+                                      
+                                                            <div class="card mb-3">
+                                                                <div class="row no-gutters">
+                                                                  <div class="col-md-4">
+                                                                     <img src="../../../assets/img/icono_clientes.svg" class="card-img2" alt="about.id">
+                                                                  </div>
+                                                                  <div class="col-md-8">
+                                                                    <div class="card-body">
+                                                                      <div>
+                                                                        <p>Tu restaurante aun no ha sido aprobado.</p>
+                                                                        <p>Contactate con el administrador del sistema.</p>
+                                                                        <!-- <p>La información de tu restaurante será eliminado por el administrador.</p> -->
+                                                                        <br>
+                                                                    </div> 
+                                                                    </div>
+                                                                  </div>
+                                                                </div>
+                                                            </div>
+                                                      
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </ng-template>
+                            </div>
+                        </div>
+                    </ng-template>
+                </ng-template>
+
+
+
+        </ng-template>
+
+                        
+        <ng-template [ngIf]="estadoRestauranteActual(estadoRestaurante) == false">
+            <div class="main-content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header card-header-info">
+                                    <h4 class="card-title">Restaurante</h4>
+                                </div>
+                                <div class="card-body">
+              
+                                    <div class="card mb-3">
+                                        <div class="row no-gutters">
+                                          <div class="col-md-4">
+                                             <img src="../../../assets/img/icono_clientes.svg" class="card-img2" alt="about.id">
+                                          </div>
+                                          <div class="col-md-8">
+                                            <div class="card-body">
+                                                <p>Tu restaurante esta deshabilitado, no puedes agregar información de tu menú por el momento.</p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                    </div>
+                              
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+
+
+

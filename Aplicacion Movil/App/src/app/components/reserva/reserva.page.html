@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar color ="dark">
+    <ion-button slot="start" fill ="none" (click)= "goRegreso()">
+      <ion-icon name = "arrow-back" ></ion-icon>
+    </ion-button>
+    <ion-button slot="end" fill ="none" (click)="presentActionSheet()">
+      <ion-icon name = "menu" ></ion-icon>
+    </ion-button>
+    <ion-title style="text-align: center;">Visualizar Peticiones</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content >
+      <ion-slides pager ="true" class="slides">
+        <ion-slide class="slide" *ngFor = "let reser of reservas">
+
+          <div *ngIf = "usuarioLog === reser.uidResta" >
+            <div *ngIf = "reser.estado.toString() === 'En Revision'">
+
+            <ion-item>
+              <ion-label>
+                <h4><b>Nombre: </b>{{reser.nombre}} </h4>
+              </ion-label>
+            </ion-item>
+            <br>
+            <ion-item>
+              <ion-label>
+                <h4><b>Numero: </b> {{reser.numero}}</h4>
+              </ion-label>
+            </ion-item>
+            <br>
+            <ion-item>
+              <ion-label>
+                <h4><b>Mesas: </b>{{reser.mesas}} </h4>
+              </ion-label>
+            </ion-item>
+            <br>
+            <ion-item>
+              <ion-label>
+                <h4><b>Tiempo Estimado: </b>{{reser.tiempo}} </h4>
+              </ion-label>
+            </ion-item>
+            <br>
+              <ion-button (click) ="aceptarReserva(reser.uid)" >ACEPTAR PETICION</ion-button>
+              <ion-button (click) ="rechazarReserva(reser.uid)">Rechazar PETICION</ion-button>
+            </div>
+          </div>
+
+        </ion-slide>
+      </ion-slides>
+
+  
+
+</ion-content>

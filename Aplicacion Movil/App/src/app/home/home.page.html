@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-title style="text-align: center;">
+      BIENVENIDO
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+    <ion-slides pager ="true" class="slides">
+
+      <ion-slide class="slide">
+        
+        <ion-card>
+
+          <img src="../../assets/icon/hambre.jpg"/>
+
+        </ion-card>
+          
+        <ion-item>
+            <ion-input type="text" [(ngModel)]="email" name="email" placeholder="Correo"></ion-input>
+          </ion-item>
+          
+            <ion-item>
+            <ion-input type="password" [(ngModel)]="password" name="password" placeholder="Contraseña"></ion-input>
+          </ion-item>
+        
+          <ion-item>
+            <ion-button (click)="OnSubmitLogin()">Iniciar Sesion</ion-button>
+          </ion-item>
+        
+          <br>
+          <p style="text-align: center;">Ó Inicia con:</p>
+        
+            <ion-button (click)="facebookLogin()" class="facebook">
+              <ion-icon slot="start" name ="logo-facebook"></ion-icon>
+            </ion-button>
+            
+          
+            <ion-button (click)="googleLogin()" class="google">
+              <ion-icon  name ="logo-google"></ion-icon>
+            </ion-button>
+        
+          <p style="text-align: center;" routerLink ="/registro">Crear Cuenta</p>
+          <br>
+          <p style="text-align: center;" routerLink="/recuperar">¿Olvidaste tu Contraseña?</p>
+          <br>
+          
+      </ion-slide>
+      <ion-slide class="slide" >
+        <p>SEGUNDO</p>
+      </ion-slide>
+      <ion-slide class="slide" >
+        <p>TERCERO</p>
+      </ion-slide>
+    </ion-slides>
+   
+</ion-content>

@@ -1,0 +1,33 @@
+.container{
+    display: flex;
+    flex-direction: column;
+}
+
+.container{
+    width: 100%;
+
+}
+
+p{
+    color: #c73521;
+    font-size: 11px;
+    margin: 0%;
+    padding: 0%;
+}
+
+button{
+    margin: 5px;
+}
+
+.add{
+    font-size: 12px;
+    background-color: white;
+    color: black;
+}
+
+a:link, a:visited{
+    background-color: blue;
+    text-align: center;
+    padding: 5px 15px 5px 15px;
+
+}

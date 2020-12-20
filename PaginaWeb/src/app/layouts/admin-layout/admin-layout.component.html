@@ -1,0 +1,21 @@
+
+<div class="wrapper">
+    <div class="sidebar" data-color="orange" data-background-color="white" data-image="./assets/img/sidebar-1.jpg">
+        <app-sidebar></app-sidebar>
+        <div class="sidebar-background"></div>
+    </div>
+    <div class="main-panel">
+        <app-navbar></app-navbar>
+        <router-outlet></router-outlet>
+        <div *ngIf="isMaps('maps')" style="text-align: center;">
+            <!-- <app-footer></app-footer> -->
+            <div class="container-fluid">
+                <div class="copyright pull-right" style="text-align: center;">
+                    &copy;
+                    {{test | date: 'yyyy'}}, MuertosDeHambre.com . Todos los derechos reservados.
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

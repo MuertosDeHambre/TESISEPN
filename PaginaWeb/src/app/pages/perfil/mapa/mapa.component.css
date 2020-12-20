@@ -1,0 +1,8 @@
+.btn{
+    background-color: #3c4752;
+    text-transform: capitalize;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    width: 20%;
+    /* margin-left: 30%; */
+  }
